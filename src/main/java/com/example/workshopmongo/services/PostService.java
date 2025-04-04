@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.workshopmongo.domain.Post;
-import com.example.workshopmongo.domain.User;
 import com.example.workshopmongo.repositories.PostRepository;
 import com.example.workshopmongo.services.exceptions.ObjectNotFoundException;
 
@@ -20,6 +19,10 @@ public class PostService {
 	public Post findById(String id) {
 		Optional<Post> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+	}
+	
+	public List<Post> findByTitle(String text) {
+		return repo.findByTitleContainingIgnoreCase(text);
 	}
 	
 }
